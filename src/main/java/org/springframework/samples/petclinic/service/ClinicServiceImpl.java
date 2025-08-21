@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.service;
 
+import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.orm.ObjectRetrievalFailureException;
@@ -62,6 +63,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     @Transactional(readOnly = true)
+    @Tool(description = "This methods let's you retrieve all the Pets in the system.")
     public Collection<Pet> findAllPets() throws DataAccessException {
         return petRepository.findAll();
     }
@@ -80,6 +82,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     @Transactional(readOnly = true)
+    @Tool(description = "This methods let's you retrieve all the Visits to the vet in the system.")
     public Collection<Visit> findAllVisits() throws DataAccessException {
         return visitRepository.findAll();
     }
@@ -98,6 +101,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     @Transactional(readOnly = true)
+    @Tool(description = "This methods let's you retrieve all the Veterinarians in the system.")
     public Collection<Vet> findAllVets() throws DataAccessException {
         return vetRepository.findAll();
     }
@@ -116,6 +120,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     @Transactional(readOnly = true)
+    @Tool(description = "This methods let's you retrieve all the pet owners in the system.")
     public Collection<Owner> findAllOwners() throws DataAccessException {
         return ownerRepository.findAll();
     }
@@ -134,6 +139,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     @Transactional(readOnly = true)
+    @Tool(description = "This methods let's you retrieve all the Pet types in the system.")
     public Collection<PetType> findAllPetTypes() throws DataAccessException {
         return petTypeRepository.findAll();
     }
@@ -158,6 +164,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     @Transactional(readOnly = true)
+    @Tool(description = "This methods let's you retrieve all the Specialties in the system.")
     public Collection<Specialty> findAllSpecialties() throws DataAccessException {
         return specialtyRepository.findAll();
     }
