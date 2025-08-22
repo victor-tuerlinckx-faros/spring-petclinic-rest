@@ -183,12 +183,6 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     @Transactional(readOnly = true)
-    public Collection<PetType> findPetTypes() throws DataAccessException {
-        return petRepository.findPetTypes();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public Owner findOwnerById(int id) throws DataAccessException {
         return findEntityById(() -> ownerRepository.findById(id));
     }
