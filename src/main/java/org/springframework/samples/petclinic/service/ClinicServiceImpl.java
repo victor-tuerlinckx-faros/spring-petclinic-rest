@@ -214,12 +214,6 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Collection<Vet> findVets() throws DataAccessException {
-        return vetRepository.findAll();
-    }
-
-    @Override
     @Transactional
     public void saveOwner(Owner owner) throws DataAccessException {
         ownerRepository.save(owner);

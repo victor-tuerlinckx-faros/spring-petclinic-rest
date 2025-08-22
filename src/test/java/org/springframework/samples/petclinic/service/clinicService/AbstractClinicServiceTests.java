@@ -165,7 +165,7 @@ abstract class AbstractClinicServiceTests {
 
     @Test
     void shouldFindVets() {
-        Collection<Vet> vets = this.clinicService.findVets();
+        Collection<Vet> vets = this.clinicService.findAllVets();
 
         Vet vet = EntityUtils.getById(vets, Vet.class, 3);
         assertThat(vet.getLastName()).isEqualTo("Douglas");
