@@ -44,7 +44,7 @@ public class ToolingFacadeImpl implements ToolingFacade {
     }
 
     @Override
-    @Tool(description = "Retrieve all pets in the system")
+    @Tool(description = "Return all pets in the system")
     public Collection<PetDto> findAllPets() throws DataAccessException {
         return clinicService.findAllPets().stream().map(petMapper::toPetDto).collect(Collectors.toList());
     }
@@ -70,7 +70,7 @@ public class ToolingFacadeImpl implements ToolingFacade {
     }
 
     @Override
-    @Tool(description = "Retrieve all visits in the system")
+    @Tool(description = "Return all visits in the system")
     public Collection<VisitDto> findAllVisits() throws DataAccessException {
         return clinicService.findAllVisits().stream().map(visitMapper::toVisitDto).collect(Collectors.toList());
     }
@@ -91,7 +91,7 @@ public class ToolingFacadeImpl implements ToolingFacade {
     }
 
     @Override
-    @Tool(description = "Retrieve all veterinarians in the system")
+    @Tool(description = "Return all veterinarians in the system")
     public Collection<VetDto> findAllVets() throws DataAccessException {
         return clinicService.findAllVets().stream().map(vetMapper::toVetDto).collect(Collectors.toList());
     }
@@ -112,7 +112,7 @@ public class ToolingFacadeImpl implements ToolingFacade {
     }
 
     @Override
-    @Tool(description = "Retrieve all pet owners in the system")
+    @Tool(description = "Return all pet owners in the system")
     public Collection<OwnerDto> findAllOwners() throws DataAccessException {
         return clinicService.findAllOwners().stream().map(ownerMapper::toOwnerDto).collect(Collectors.toList());
     }
@@ -138,7 +138,7 @@ public class ToolingFacadeImpl implements ToolingFacade {
     }
 
     @Override
-    @Tool(description = "Retrieve all pet types in the system")
+    @Tool(description = "Return all pet types in the system")
     public Collection<PetTypeDto> findAllPetTypes() throws DataAccessException {
         return clinicService.findAllPetTypes().stream().map(petTypeMapper::toPetTypeDto).collect(Collectors.toList());
     }
@@ -159,7 +159,7 @@ public class ToolingFacadeImpl implements ToolingFacade {
     }
 
     @Override
-    @Tool(description = "Retrieve all veterinarian specialties in the system")
+    @Tool(description = "Return all veterinarian specialties in the system")
     public Collection<SpecialtyDto> findAllSpecialties() throws DataAccessException {
         return clinicService.findAllSpecialties().stream().map(specialtyMapper::toSpecialtyDto).collect(Collectors.toList());
     }
