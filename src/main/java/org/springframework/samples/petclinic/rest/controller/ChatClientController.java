@@ -1,8 +1,9 @@
 package org.springframework.samples.petclinic.rest.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.samples.petclinic.service.ClinicService;
+import org.springframework.samples.petclinic.service.ToolingFacade;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class ChatClientController {
     private final ChatClient chatClient;
-    private final ClinicService clinicService;
+    private final ToolingFacade toolingFacade;
 
-    public ChatClientController(ChatClient.Builder builder, ClinicService clinicService) {
-        this.chatClient = builder.build();
-        this.clinicService = clinicService;
+    public ChatClientController(ChatClient.Builder builder, ToolingFacade toolingFacade) {
+        this.chatClient = builder.defaultAdvisors(SimpleLoggerAdvisor.builder().build()).build();
+        this.toolingFacade = toolingFacade;
     }
 
     @PostMapping("/chat")
@@ -33,7 +34,7 @@ public class ChatClientController {
         String answer = chatClient.prompt()
             .system(instruction)
             .user(question)
-//            .tools(clinicService)
+            .tools(toolingFacade)
             .call()
             .content();
         return ResponseEntity.ok(answer);
