@@ -3,7 +3,9 @@ package org.springframework.samples.petclinic.rest.controller;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.service.ToolingFacade;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +20,11 @@ public class ChatClientController {
     private final ToolingFacade toolingFacade;
     private final String conversationId = UUID.randomUUID().toString();
 
-    public ChatClientController(ChatClient.Builder builder, ToolingFacade toolingFacade, ChatMemory memory) {
+    public ChatClientController(ChatClient.Builder builder, ToolingFacade toolingFacade, ChatMemory memory, VectorStore vectorStore) {
         this.chatClient = builder
             .defaultAdvisors(
                 MessageChatMemoryAdvisor.builder(memory).conversationId(conversationId).build(),
+                QuestionAnswerAdvisor.builder(vectorStore).build(),
                 SimpleLoggerAdvisor.builder().build())
             .build();
         this.toolingFacade = toolingFacade;
@@ -46,7 +49,7 @@ public class ChatClientController {
         Only call a tool if the user explicitly asks for information that cannot be answered without the tool.
         If you can answer directly, do so without calling any tool.
 
-        Always formulate your answers in clean-text, enumerations
+        When asked about the job of a veterinarian, consult the vector store!
 
         When asked anything off-topic, respond with: 'I'm afraid I can't help you with that.'
         """;
