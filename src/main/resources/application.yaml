@@ -1,0 +1,73 @@
+# active profiles config
+#
+# application use two active profiles
+#
+# one - for select database
+# ------------------------------------------------
+# When using HSQL, use: hsqldb
+# When using MySQL, use: mysql
+# When using PostgeSQL, use: postgres
+# When using H2, use: h2
+# ------------------------------------------------
+#
+# one for select repository layer
+# ------------------------------------------------
+# When using Spring jpa, use: jpa
+# When using Spring JDBC, use: jdbc
+# When using Spring Data JPA, use: spring-data-jpa
+# ------------------------------------------------
+
+# database init, supports hsqldb, mysql and postgres too
+database: h2
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.ai: DEBUG
+
+# Enable the desired authentication type (disabled by default)
+petclinic:
+  security:
+    enable: false
+
+server:
+  port: 9966
+  servlet:
+    context-path: /petclinic/
+
+spring:
+  ai:
+#    ollama:
+#      chat:
+#        options:
+#          model: 'llama3.1:latest'
+#          max-tokens: 250
+    openai:
+      api-key: lm-studio
+      base-url: http://127.0.0.1:1234
+      chat:
+        options:
+          model: openai/gpt-oss-20b
+          max-tokens: 300
+      embedding:
+        options:
+          model: nomic-ai/nomic-embed-text-v1.5-GGUF
+  jpa:
+    open-in-view: false
+  messages:
+    basename: messages/messages
+  profiles:
+    active: h2,spring-data-jpa
+  sql:
+    # Ensures schema & data reload on every restart (good for local dev)
+    init:
+      mode: always
+      data-locations: classpath*:db/${database}/data.sql
+      schema-locations: classpath*:db/${database}/schema.sql
+
+# OpenAPI/Swagger UI (Defaults to true)
+#springdoc:
+#  api-docs:
+#    enabled: true
+#  swagger-ui:
+#    enabled: true
